@@ -124,15 +124,32 @@ function numPointsScored(playersName) {
   const homePlayer=gameArray.away.players[playersName];
   const awayPlayer = gameArray.home.players[playersName];
   
-    if (homePlayer) {
-    return homePlayer.points;
-  } else if (awayPlayer) {
-    return awayPlayer.points;
+    if (homePlayer && homePlayer.points) {
+      return homePlayer.points;
+    } else if (awayPlayer && awayPlayer.points) {
+      return awayPlayer.points;
+    } else {
+      return 'Player is not listed';
+    }
+}
+const playersName = 'Ben Gordon';
+const scoredPoints = numPointsScored(playersName);
+console.log(`${playersName} scored: ${scoredPoints} points`);
+
+//takes in an argument of a player's name and returns the shoe size for that player.
+function shoeSize(playerName) {
+  const gameArray = gameObject();
+  const homePlayer = gameArray.away.players[playerName];
+  const awayPlayer = gameArray.home.players[playerName];
+
+  if (homePlayer && homePlayer.shoe) {
+    return homePlayer.shoe;
+  } else if (awayPlayer && awayPlayer.shoe) {
+    return awayPlayer.shoe;
   } else {
     return 'Player is not listed';
   }
 }
-const playersName = 'Ben Gordon';
-const scoredPoints = numPointsScored(playersName);
-console.log(`${playersName} scored ${ scoredPoints }`);
-
+const playerName = 'Brendan Haywood';
+const playerShoeSize = shoeSize(playerName);
+console.log(`${playerName} shoe size is:  ${playerShoeSize}`);
