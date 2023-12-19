@@ -122,15 +122,15 @@ console.log(gameObject());
 function numPointsScored(playersName) {
   const gameArray = gameObject();
   const awayPlayer = gameArray.home.players[playersName];
-  const homePlayer=gameArray.away.players[playersName];
-  
-    if (homePlayer && homePlayer.points) {
-      return homePlayer.points;
-    } else if (awayPlayer && awayPlayer.points) {
-      return awayPlayer.points;
-    } else {
-      return 'Player is not listed';
-    }
+  const homePlayer = gameArray.away.players[playersName];
+
+  if (homePlayer && homePlayer.points) {
+    return homePlayer.points;
+  } else if (awayPlayer && awayPlayer.points) {
+    return awayPlayer.points;
+  } else {
+    return 'Player is not listed';
+  }
 }
 const playersName = 'Ben Gordon';
 const scoredPoints = numPointsScored(playersName);
@@ -165,10 +165,10 @@ function teamColors(teamName) {
   } else if (awayTeam.teamName === teamName) {
     return awayTeam.colors;
   } else {
-    return 'Team not listed'
+    return 'Team not listed';
   }
 }
-const groupColors = teamColors('Charlotte Hornets')
+const groupColors = teamColors('Charlotte Hornets');
 console.log(groupColors);
 
 //operates on the game object to return an array of the team names.
@@ -178,7 +178,22 @@ function teamNames() {
   const homeTeam = gameArray.home.teamName;
   const awayTeam = gameArray.away.teamName;
 
-return [homeTeam, awayTeam]
+  return [homeTeam, awayTeam];
 }
 const namesOfTeam = teamNames();
 console.log(namesOfTeam);
+
+//returns an array of the jersey number's for that team.
+function playerNumbers(teamName) {
+  const gameArray = gameObject();
+
+  const homeTeam = gameArray.home.players;
+  const awayTeam = gameArray.away.players;
+
+  const homeJerseyNumbers = Object.values(homeTeam).map((player) => player.number);
+  const awayJerseyNumbers = Object.values(awayTeam).map((player) => player.number);
+
+  return [homeJerseyNumbers, awayJerseyNumbers];
+}
+const JerseyNumbers = playerNumbers('Charlotte Hornets');
+console.log(JerseyNumbers);
