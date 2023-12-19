@@ -190,10 +190,128 @@ function playerNumbers(teamName) {
   const homeTeam = gameArray.home.players;
   const awayTeam = gameArray.away.players;
 
-  const homeJerseyNumbers = Object.values(homeTeam).map((player) => player.number);
-  const awayJerseyNumbers = Object.values(awayTeam).map((player) => player.number);
+  const homeJerseyNumbers = Object.values(homeTeam).map(
+    (player) => player.number
+  );
+  const awayJerseyNumbers = Object.values(awayTeam).map(
+    (player) => player.number
+  );
 
   return [homeJerseyNumbers, awayJerseyNumbers];
 }
 const JerseyNumbers = playerNumbers('Charlotte Hornets');
 console.log(JerseyNumbers);
+
+//
+function playerStats(playerStatsName) {
+  const gameArray = gameObject();
+
+  const homePlayer = gameArray.home.players[playerName];
+  const awayPlayer = gameArray.away.players[playerName];
+
+  if (homePlayer) {
+    return homePlayer;
+  } else if (awayPlayer) {
+    return awayPlayer;
+  } else {
+    return null;
+  }
+}
+
+const playerStatsName = 'Charlotte Hornets';
+const playerStatsResult = playerStats(playerStatsName);
+console.log(playerStatsResult);
+
+//returns the number of rebounds associated with the player that has the largest shoe size.
+function bigShoeRebounds() {
+  const gameObj = gameObject();
+  const allPlayers = [
+    ...Object.values(gameObj.home.players),
+    ...Object.values(gameObj.away.players),
+  ];
+
+  const playerWithLargestShoeSize = allPlayers.reduce(
+    (maxPlayer, currentPlayer) => {
+      return currentPlayer.shoe > maxPlayer.shoe ? currentPlayer : maxPlayer;
+    },
+    { shoe: 0 }
+  );
+
+  return playerWithLargestShoeSize.rebounds;
+}
+
+const result = bigShoeRebounds();
+console.log(result);
+
+//player with the most points
+function mostPointsScored() {
+  const gameObj = gameObject();
+  const allPlayers = [
+    ...Object.values(gameObj.home.players),
+    ...Object.values(gameObj.away.players),
+  ];
+
+  let playerWithMostPoints = allPlayers.reduce(
+    (maxPlayer, currentPlayer) => {
+      return currentPlayer.points > maxPlayer.points
+        ? currentPlayer
+        : maxPlayer;
+    },
+    { points: 0 }
+  );
+
+  return playerWithMostPoints.points;
+}
+
+const results = mostPointsScored();
+console.log(results);
+
+//team has the most points
+function winningTeam() {
+  const gameObj = gameObject();
+  const homePlayers = Object.values(gameObj.home.players);
+  const awayPlayers = Object.values(gameObj.away.players);
+
+  // Calculate total points for each team
+  const homePoints = homePlayers.reduce(
+    (total, player) => total + player.points,
+    0
+  );
+  const awayPoints = awayPlayers.reduce(
+    (total, player) => total + player.points,
+    0
+  );
+
+  // Determine the winning team
+  return homePoints > awayPoints
+    ? gameObj.home.teamName
+    : gameObj.away.teamName;
+}
+
+const teamWin = winningTeam();
+console.log(teamWin);
+
+//player has the longest name
+function playerWithLongestName() {
+  const gameData = gameObject();
+
+  // Combine players from home and away teams
+  const allPlayers = [
+    ...Object.values(gameData.home.players),
+    ...Object.values(gameData.away.players),
+  ];
+
+  // Use reduce to find the player with the longest name
+  const playerWithLongestName = allPlayers.reduce(
+    (prevPlayer, currentPlayer) => {
+      return currentPlayer.number.length > prevPlayer.number.length
+        ? currentPlayer
+        : prevPlayer;
+    }
+  );
+
+  return playerWithLongestName.number;
+}
+
+// Call the function and log the result
+console.log(playerWithLongestName());
