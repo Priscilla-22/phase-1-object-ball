@@ -171,6 +171,14 @@ function teamColors(teamName) {
 const groupColors = teamColors('Charlotte Hornets')
 console.log(groupColors);
 
+//operates on the game object to return an array of the team names.
+function teamNames() {
+  const gameArray = gameObject();
 
+  const homeTeam = gameArray.home.teamName;
+  const awayTeam = gameArray.away.teamName;
 
+return [homeTeam, awayTeam]
 }
+const namesOfTeam = teamNames();
+console.log(namesOfTeam);
