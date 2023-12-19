@@ -1,3 +1,4 @@
+// Part 1: Building the Object
 function gameObject() {
   return {
     home: {
@@ -116,3 +117,22 @@ function gameObject() {
   };
 }
 console.log(gameObject());
+
+//Function Building
+function numPointsScored(playersName) {
+  const gameArray = gameObject();
+  const homePlayer=gameArray.away.players[playersName];
+  const awayPlayer = gameArray.home.players[playersName];
+  
+    if (homePlayer) {
+    return homePlayer.points;
+  } else if (awayPlayer) {
+    return awayPlayer.points;
+  } else {
+    return 'Player is not listed';
+  }
+}
+const playersName = 'Ben Gordon';
+const scoredPoints = numPointsScored(playersName);
+console.log(`${playersName} scored ${ scoredPoints }`);
+
