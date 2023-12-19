@@ -272,7 +272,6 @@ function winningTeam() {
   const homePlayers = Object.values(gameObj.home.players);
   const awayPlayers = Object.values(gameObj.away.players);
 
-  // Calculate total points for each team
   const homePoints = homePlayers.reduce(
     (total, player) => total + player.points,
     0
@@ -282,7 +281,6 @@ function winningTeam() {
     0
   );
 
-  // Determine the winning team
   return homePoints > awayPoints
     ? gameObj.home.teamName
     : gameObj.away.teamName;
@@ -293,25 +291,37 @@ console.log(teamWin);
 
 //player has the longest name
 function playerWithLongestName() {
-  const gameData = gameObject();
+    const gameData = gameObject();
 
-  // Combine players from home and away teams
-  const allPlayers = [
-    ...Object.values(gameData.home.players),
-    ...Object.values(gameData.away.players),
-  ];
+    const allPlayerNames = [
+        ...Object.keys(gameData.home.players),
+        ...Object.keys(gameData.away.players)
+    ];
 
-  // Use reduce to find the player with the longest name
-  const playerWithLongestName = allPlayers.reduce(
-    (prevPlayer, currentPlayer) => {
-      return currentPlayer.number.length > prevPlayer.number.length
-        ? currentPlayer
-        : prevPlayer;
-    }
-  );
+    const playerWithLongestName = allPlayerNames.find(
+        (playerName) => playerName.length === Math.max(...allPlayerNames.map((name) => name.length))
+    );
 
-  return playerWithLongestName.number;
+    return playerWithLongestName;
 }
 
-// Call the function and log the result
 console.log(playerWithLongestName());
+
+
+// Function to check if the player with the longest name also had the most steals
+function doesLongNameStealATon() {
+    const gameData = gameObject();
+    const allPlayers = [
+        ...Object.values(gameData.home.players),
+        ...Object.values(gameData.away.players)
+    ];
+
+    const playerWithMostSteals = allPlayers.reduce((max, player) =>
+        player.steals > max.steals ? player : max
+    );
+
+    const playerWithLongestNameResult = playerWithLongestName();
+    return playerWithLongestNameResult.number === playerWithMostSteals.number;
+}
+
+console.log(doesLongNameStealATon());
