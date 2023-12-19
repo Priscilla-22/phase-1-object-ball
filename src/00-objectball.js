@@ -121,8 +121,8 @@ console.log(gameObject());
 //Function Building
 function numPointsScored(playersName) {
   const gameArray = gameObject();
-  const homePlayer=gameArray.away.players[playersName];
   const awayPlayer = gameArray.home.players[playersName];
+  const homePlayer=gameArray.away.players[playersName];
   
     if (homePlayer && homePlayer.points) {
       return homePlayer.points;
@@ -153,3 +153,24 @@ function shoeSize(playerName) {
 const playerName = 'Brendan Haywood';
 const playerShoeSize = shoeSize(playerName);
 console.log(`${playerName} shoe size is:  ${playerShoeSize}`);
+
+//takes in an argument and returns an array of that teams colors.
+function teamColors(teamName) {
+  const gameArray = gameObject();
+  const homeTeam = gameArray.home;
+  const awayTeam = gameArray.away;
+
+  if (homeTeam.teamName === teamName) {
+    return homeTeam.colors;
+  } else if (awayTeam.teamName === teamName) {
+    return awayTeam.colors;
+  } else {
+    return 'Team not listed'
+  }
+}
+const groupColors = teamColors('Charlotte Hornets')
+console.log(groupColors);
+
+
+
+}
