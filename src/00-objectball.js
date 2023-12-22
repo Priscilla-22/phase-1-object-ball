@@ -224,7 +224,7 @@ console.log(playerStatsResult);
 
 //returns the number of rebounds associated with the player that has the largest shoe size.
 function bigShoeRebounds() {
-  const gameObj = gameObject();
+  const game = gameObject();
   const allPlayers = [
     ...Object.values(gameObj.home.players),
     ...Object.values(gameObj.away.players),
@@ -245,10 +245,10 @@ console.log(result);
 
 //player with the most points
 function mostPointsScored() {
-  const gameObj = gameObject();
+  const gameArray= gameObject();
   const allPlayers = [
-    ...Object.values(gameObj.home.players),
-    ...Object.values(gameObj.away.players),
+    ...Object.values(gameArray.home.players),
+    ...Object.values(gameArray.away.players),
   ];
 
   let playerWithMostPoints = allPlayers.reduce(
@@ -268,9 +268,9 @@ console.log(results);
 
 //team has the most points
 function winningTeam() {
-  const gameObj = gameObject();
-  const homePlayers = Object.values(gameObj.home.players);
-  const awayPlayers = Object.values(gameObj.away.players);
+  const gameArray = gameObject();
+  const homePlayers = Object.values(gameArray.home.players);
+  const awayPlayers = Object.values(gameArray.away.players);
 
   const homePoints = homePlayers.reduce(
     (total, player) => total + player.points,
@@ -282,8 +282,8 @@ function winningTeam() {
   );
 
   return homePoints > awayPoints
-    ? gameObj.home.teamName
-    : gameObj.away.teamName;
+    ? gameArray.home.teamName
+    : gameArray.away.teamName;
 }
 
 const teamWin = winningTeam();
